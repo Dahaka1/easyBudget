@@ -1,6 +1,8 @@
 # CLI Utility
 
-Brief description of your project.
+Welcome to My CLI Utility Project!
+
+[English](readme.md) | [Русский](readme-ru.md)
 
 ## Description
 
