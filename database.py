@@ -1,9 +1,10 @@
 import sqlite3
 import hashlib
 import os
+from typing import Tuple
 
 
-def hash_password(password: str, salt: bytes = None):
+def hash_password(password: str, salt: bytes = None) -> Tuple[bytes, bytes]:
     """Хэшируем пароль"""
     if salt is None:
         salt = os.urandom(16)  # Генерируем случайную соль
@@ -17,14 +18,14 @@ class Database:
     USERS_TABLE_NAME = "users_table"
     TEXT_TABLE_NAME = "text_table"
 
-    def __init__(self, table_name: str):
+    def __init__(self, table_name: str) -> None:
         """Указываем параметры работы для с базой данных"""
         self.conn = sqlite3.connect("users.sqlite")  # Создаем коннектор к базе
         self.cursor = self.conn.cursor()  # Создаем курсор
         self.table_name = table_name
         self.create_tables()
 
-    def create_tables(self):
+    def create_tables(self) -> None:
         """Создаем таблицы"""
         self.cursor.execute(
             f"CREATE TABLE IF NOT EXISTS {self.USERS_TABLE_NAME} (user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -36,7 +37,7 @@ class Database:
         )
         self.conn.commit()
 
-    def row_exists(self):
+    def row_exists(self) -> bool:
         """Проверяем, есть ли строки в таблице и возвращаем нужный ответ"""
         try:
             self.cursor.execute(f"SELECT 1 FROM {self.TEXT_TABLE_NAME} LIMIT 1")
@@ -48,11 +49,11 @@ class Database:
 
 class UserDatabase(Database):
     """Создаем класс для работы с юзером"""
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(self.USERS_TABLE_NAME)
         super().__init__(self.TEXT_TABLE_NAME)
 
-    def create_user(self, user: tuple):
+    def create_user(self, user: tuple) -> bool:
         """Функция создания пользователя, принимает кортеж"""
         self.create_tables()  # Создаем таблицу, если она не была еще создана
 
@@ -80,7 +81,7 @@ class UserDatabase(Database):
             self.conn.commit()
             return True
 
-    def authenticate_user(self, user: tuple):
+    def authenticate_user(self, user: tuple) -> bool:
         """Аутентифицируем юзера"""
         if not self.row_exists():  # Если в таблице нет столбцов вернет False
             return False
@@ -101,7 +102,7 @@ class UserDatabase(Database):
 
         return False
 
-    def delete_user(self, user: tuple):
+    def delete_user(self, user: tuple) -> bool:
         """Удаляем пользователя"""
         if not self.row_exists():  # Если в таблице нет столбцов вернет False
             return False
@@ -130,10 +131,10 @@ class UserDatabase(Database):
 class TextDatabase(Database):
     """Создаем класс для работы с текстом"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(self.TEXT_TABLE_NAME)
 
-    def update_text(self, login: str, text: str):
+    def update_text(self, login: str, text: str) -> bool:
         """Обновляем текст"""
         # Ищем столбец text в строке где есть введенный login
         query = f"UPDATE {self.TEXT_TABLE_NAME} SET text = ? WHERE login = ?"
@@ -141,7 +142,7 @@ class TextDatabase(Database):
         self.conn.commit()
         return True
 
-    def delete_text(self, login: str):
+    def delete_text(self, login: str) -> str:
         """Удаляем текст"""
         # Ищем столбец text в строке где есть введенный login
         query_check = f"SELECT text FROM {self.TEXT_TABLE_NAME} WHERE login = ?"
@@ -156,7 +157,7 @@ class TextDatabase(Database):
         # Проверяем, существовала ли вообще строка до этого запроса и возвращаем нужный ответ
         return text_before_del[0]
 
-    def show_text(self, login: str):
+    def show_text(self, login: str) -> str:
         """Выводим текст на экран"""
         # Ищем столбец text в строке где есть введенный login
         query = f"SELECT text FROM {self.TEXT_TABLE_NAME} WHERE login = ?"

@@ -1,9 +1,11 @@
 import re
+from typing import Union
+
 import generate_password
 from database import TextDatabase, UserDatabase
 
 
-def menu():
+def menu() -> None:
     """Функция запуска программы и распределение запросов"""
     user_operation = UserOperation()
 
@@ -15,22 +17,19 @@ def menu():
     )
     match query:
         case "1":
-            check = user_operation.create()
-            if check is not None:
-                return check
+            user_operation.create()
+
         case "2":
-            check = user_operation.authenticate()
-            if check is not None:
-                return check
+            user_operation.authenticate()
+
         case "3":
-            check = user_operation.delete()
-            if check is not None:
-                return check
+            user_operation.delete()
+
         case _:
             return exit_program()
 
 
-def menu_authorize(login: str):
+def menu_authorize(login: str) -> None:
     """ Функция распределение авторизированных запросов """
     text_operation = TextOperation()
 
@@ -52,7 +51,7 @@ def menu_authorize(login: str):
                 return exit_user(login)
 
 
-def initialization():
+def initialization() -> tuple:
     """Функция создания кортежа на основе введенных строк"""
     prompts = [
         ("Введите логин или email: ", lambda x: len(x) > 0),
@@ -61,7 +60,7 @@ def initialization():
     return user
 
 
-def checking_values(prompts: list):
+def checking_values(prompts: list) -> list:
     """Функция проверки корректности введенных строк"""
     user = []
     for prompt, validation in prompts:
@@ -75,7 +74,7 @@ def checking_values(prompts: list):
     return user
 
 
-def exit_program():
+def exit_program() -> Union[bool, None]:
     """Функция выхода из программы"""
     ask = input(
         'Если вы хотите выйти из программы введите "1". '
@@ -87,7 +86,7 @@ def exit_program():
         return menu()
 
 
-def exit_user(login: str):
+def exit_user(login: str) -> None:
     """Функция выхода из аккаунта"""
     ask = input(
         'Если вы хотите выйти из аккаунта введите "1". '
@@ -102,10 +101,10 @@ def exit_user(login: str):
 class UserOperation:
     """Создаем операционный модуль для работы с юзером"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.user_db = UserDatabase()
 
-    def create(self):
+    def create(self) -> Union[bool, None]:
         """Функция запроса к базе для создания пользователя"""
         # С помощью анонимных функций создаем список кортежей, в котором указаны условия
         # к вводимым пользователем строкам
@@ -124,6 +123,8 @@ class UserOperation:
             user[2] = generate_password.choice_settings()
             print(f'Сгенерированный пароль: {user[2]}\n'
                   f'Запишите его в надежное место или запомните')
+        # Преобразуем список в кортеж и отправляем его в базу данных на проверку.
+        # Если создание прошло успешно, возвращаем соответствущее сообщение
         user = tuple(user)
         check = self.user_db.create_user(user)
         if check:
@@ -133,7 +134,7 @@ class UserOperation:
             print('С этим логином и почтой уже существует учетная запись')
             return False
 
-    def authenticate(self):
+    def authenticate(self) -> None:
         """Функция запроса к базе для авторизации пользователя"""
         # Передаем введенные строки пользователя в функцию корректности
         # далее передаем эти данные в базу и ждем ответа.
@@ -146,7 +147,7 @@ class UserOperation:
             print("Неправильный логин или пароль")
             return menu()
 
-    def delete(self):
+    def delete(self) -> None:
         """Функция запроса к базе для удаления пользователя"""
         # Передаем введенные строки пользователя в функцию корректности
         # далее передаем эти данные в базу и ждем ответа.
@@ -165,7 +166,7 @@ class TextOperation:
     def __init__(self):
         self.text_db = TextDatabase()
 
-    def update(self, login: str):
+    def update(self, login: str) -> None:
         """Создаем функцию добавления текста в таблицу"""
         text = input("Введите текст, который хотите добавить в запись': \n")
 
@@ -173,7 +174,7 @@ class TextOperation:
         if check:
             print('Текст успешно обновлен!')
 
-    def show(self, login: str):
+    def show(self, login: str) -> None:
         """Создаем функцию вывода на просмотр сохраненного текста"""
         check = self.text_db.show_text(login)
         if check != '':
@@ -181,7 +182,7 @@ class TextOperation:
         else:
             print('Запись еще не создана!')
 
-    def delete(self, login: str):
+    def delete(self, login: str) -> None:
         """Создаем функцию удаления текста из таблицы"""
         check = self.text_db.delete_text(login)
         if check != '':

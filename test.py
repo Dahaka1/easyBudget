@@ -7,11 +7,11 @@ from operation import menu, menu_authorize
 class MockIoProvider:
     """Имитируем провайдер пользовательского ввода для тестов"""
 
-    def __init__(self, inputs):
+    def __init__(self, inputs: list[str]) -> None:
         """Инициализируем объект для имитации"""
         self.inputs = iter(inputs)
 
-    def input(self, prompt):
+    def input(self, prompt: str) -> str:
         """Имитируем пользовательский ввод"""
         try:
             return next(self.inputs)
@@ -22,7 +22,7 @@ class MockIoProvider:
 class TestUserCreated(unittest.TestCase):
     """Тестируем функции взаимодействия с учетной записью"""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Устанавливаем параметры тестирования"""
         self.main_menu = menu
 
@@ -36,7 +36,7 @@ class TestUserCreated(unittest.TestCase):
         "4",  # Выход из программы
         "1",  # Подтверждение выхода
     ])
-    def test_create_user(self, mock_input: unittest.mock.MagicMock):
+    def test_create_user(self, mock_input: unittest.mock.MagicMock) -> None:
         """Тестируем создание пользователя имитируем инпуты, передаем параметр mock_input в функцию"""
         first_expected_string = 'Пользователь успешно создан!'
         second_expected_string = 'С этим логином и почтой уже существует учетная запись'
@@ -60,7 +60,7 @@ class TestUserCreated(unittest.TestCase):
         "4",  # Выход из программы
         "1",  # Подтверждение выхода
     ])
-    def test_authorization_user(self, mock_input: unittest.mock.MagicMock):
+    def test_authorization_user(self, mock_input: unittest.mock.MagicMock) -> None:
         """Тестируем авторизации пользователя имитируем инпуты, передаем параметр mock_input в функцию"""
         first_expected_string = 'Вход успешно выполнен! Хорошего дня'
         second_expected_string = 'Неправильный логин или пароль'
@@ -82,7 +82,7 @@ class TestUserCreated(unittest.TestCase):
         "4",  # Выход из программы
         "1",  # Подтверждение выхода
     ])
-    def test_delete_user(self, mock_input: unittest.mock.MagicMock):
+    def test_delete_user(self, mock_input: unittest.mock.MagicMock) -> None:
         """Тестируем удаления пользователя имитируем инпуты, передаем параметр mock_input в функцию"""
         first_expected_string = 'Пользователь успешно удален'
         second_expected_string = 'Пользователя с введенными данными не существует'
@@ -101,7 +101,7 @@ class TestUserCreated(unittest.TestCase):
 class TestTextCreated(unittest.TestCase):
     """Тестируем функции обработки записи"""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Устанавливаем параметры тестирования и создаем декоратор, который создает
         пользователя перед каждым тестом, если он еще не был создан"""
         self.main_menu = menu
@@ -127,7 +127,7 @@ class TestTextCreated(unittest.TestCase):
         "4",  # Выход из программы
         "1",  # Подтверждение выхода
     ])
-    def test_adding_text(self, mock_input: unittest.mock.MagicMock):
+    def test_adding_text(self, mock_input: unittest.mock.MagicMock) -> None:
         """Тестируем добавление записи"""
         expected_string = 'Текст успешно обновлен!'
 
@@ -147,7 +147,7 @@ class TestTextCreated(unittest.TestCase):
         "4",  # Выход из программы
         "1",  # Подтверждение выхода
     ])
-    def test_check_added_text(self, mock_input: unittest.mock.MagicMock):
+    def test_check_added_text(self, mock_input: unittest.mock.MagicMock) -> None:
         """Тестируем просмотр сохраненной записи"""
         first_expected_string = 'Good day!'
         second_expected_string = 'Запись еще не создана!'
@@ -169,7 +169,7 @@ class TestTextCreated(unittest.TestCase):
         "4",  # Выход из программы
         "1",  # Подтверждение выхода
     ])
-    def test_delete_text(self, mock_input: unittest.mock.MagicMock):
+    def test_delete_text(self, mock_input: unittest.mock.MagicMock) -> None:
         """Тестируем функцию удаления записи"""
         first_expected_string = "Запись удалена!"
         second_expected_string = "Запись еще не создана!"
