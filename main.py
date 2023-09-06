@@ -1,5 +1,5 @@
 def main() -> None:
-    from operation import menu
+    from utils.menu import menu
     menu()
 
 
