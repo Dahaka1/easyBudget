@@ -2,7 +2,7 @@
 
 Welcome to My CLI Utility Project!
 
-[English](README.md) | [Русский](README-ru.md)
+[English](README-en.md) | [Русский](README.md)
 
 ## Description
 
