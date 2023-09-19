@@ -2,7 +2,7 @@
 
 Добро пожаловать в мой проект CLI-утилита!
 
-[English](README.md) | [Русский](README-ru.md)
+[English](README-en.md) | [Русский](README.md)
 
 ## Описание
 
