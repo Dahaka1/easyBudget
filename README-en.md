@@ -1,6 +1,8 @@
-# CLI Utility
+# CLI Utility 
 
-Brief description of your project.
+Welcome to My CLI Utility Project!
+
+[English](README-en.md) | [Русский](README.md)
 
 ## Description
 
@@ -18,22 +20,24 @@ Data Storage: SQLite database.
 
 ## Usage
 
-The program can be employed to implement user authentication and 
-authorization services via the command-line interface (CLI). The 
-program uses password hashing with the sha256 algorithm to ensure
-the secure storage of passwords.
+The program can be used to implement services for secure
+storage of user-entered texts. This utility uses
+user authentication and authorization through the command line
+(CLI), and also employs password hashing with
+the sha256 algorithm to ensure the security
+of password storage.
 
 ## Installation
 
 1. Clone the repository: `git clone 
-   https://github.com/Dahaka1/tolearn/tree/student`
+   https://github.com/bagirov3min/CLI-Utility`
 2. Navigate to the root directory of your project
 3. Run the program by executing the main.py file
 
 ## Authors
 
-Name: Emin
-Last Bagirov
-GitHub: @bagirov3min (https://github.com/bagirov3min)
-Email: bagirov3min@gmail.com
-Telegram: @Emin_pro
+Name: Emin <br>
+Last: Bagirov <br>
+GitHub: [@bagirov3min](https://github.com/bagirov3min) <br>
+Email: bagirov3min@gmail.com <br>
+Telegram: @Emin_pro <br>

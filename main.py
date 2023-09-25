@@ -1,4 +1,7 @@
+def main() -> None:
+    from utils.menu import main_menu
+    main_menu()
+
+
 if __name__ == "__main__":
-    from operation import UserOperation
-    operation = UserOperation()
-    operation.main()
+    main()
