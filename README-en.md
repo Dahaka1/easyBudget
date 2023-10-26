@@ -1,4 +1,4 @@
-# CLI Utility
+# CLI Utility 
 
 Welcome to My CLI Utility Project!
 
@@ -44,6 +44,9 @@ of password storage.
 6. To run tests, use the test_suite.py file.
     ```bash
     python test_suite.py
+=======
+3. Run the program by executing the main.py file
+
 ## Authors
 
 Name: Emin <br>
