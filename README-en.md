@@ -32,6 +32,19 @@ of password storage.
 1. Clone the repository: `git clone 
    https://github.com/bagirov3min/CLI-Utility`
 2. Navigate to the root directory of your project
+3. Install the dependencies from requirements.txt:
+    ```bash
+    pip install -r requirements.txt
+4. Run the generate_salt.py file:
+    ```bash
+    python utils/generate_salt.py
+5. Next, run the program by executing the main.py file:
+    ```bash
+    python main.py
+6. To run tests, use the test_suite.py file.
+    ```bash
+    python test_suite.py
+=======
 3. Run the program by executing the main.py file
 
 ## Authors

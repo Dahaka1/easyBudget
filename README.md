@@ -31,6 +31,22 @@
 1. Клонируйте репозиторий: `git clone 
    https://github.com/bagirov3min/CLI-Utility`
 2. Перейдите в корневую директорию вашего проекта
+3. Установите зависимости из requirements.txt:
+    ```bash
+    pip install -r requirements.txt
+4. Запустите файл generate_salt.py:
+    ```bash
+    python utils/generate_salt.py
+5. Затем запустите программу, выполнив файл main.py
+    ```bash
+    python main.py
+6. Чтобы запустить тесты, используйте файл test_suite.py
+    ```bash
+    python test_suite.py
+=======
+1. Клонируйте репозиторий: `git clone 
+   https://github.com/bagirov3min/CLI-Utility`
+2. Перейдите в корневую директорию вашего проекта
 3. Запустите программу, выполнив файл main.py
 
 
